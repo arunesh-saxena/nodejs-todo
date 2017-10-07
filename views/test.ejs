@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>test demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <!-- <script id='outer' type="text/javascript" src='https://publish.viostream.com/embed/api?222'></script> -->
+</head>
+
+<body>
+  <h1>this is test html</h1>
+  <script>
+    $(function () {
+      var students = [];
+
+      students.push({ Name: 'John', Track: 'HTML', Score: 2000 });
+
+      students.push({ Name: 'Ron', Track: 'CSS', Score: 2400 });
+
+      students.push({ Name: 'Jim', Track: 'javaScript', Score: 2800 });
+
+      var newArray = students.map((currentValue, index, array) => {
+        currentValue['NickName'] =currentValue['Name'];
+        delete currentValue['Name'];
+        return currentValue;
+      })
+
+      console.log(newArray)
+    })
+  </script>
+</body>
+
+</html>

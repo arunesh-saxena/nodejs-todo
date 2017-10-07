@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <h1> Welecome to profile page witdh userId <%= userId %></h1>
+    <ul>
+      <li>Name: <%= data.name%></li>
+      <li>Home Town: <%= data.homeTown %></li>
+    </ul>
+    <ul>
+      <% data.hobbies.forEach(function(item){%>
+        <li><%=item%></li>
+    <%  })%>
+    </ul>
+
+  </body>
+</html>
