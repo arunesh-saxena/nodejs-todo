@@ -78,7 +78,7 @@ var login = function (req, res) {
                 } else {
                     res.status(CONSTANTS.serCode.success).json({
                         success: false,
-                        data: 'username and password does\'t not match.'
+                        message: 'username and password does\'t not match.'
                     });
                 }
             });

@@ -26,7 +26,7 @@ var isAuthenticated = (req, res, next) => {
     }
 };
 var issue2options = {
-    origin: [CONSTANTS.allowedOrigin],
+    origin: [CONSTANTS.allowedOrigin, CONSTANTS.allowedOrigin2, CONSTANTS.allowedOrigin3],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

@@ -1,5 +1,7 @@
 const CONSTANTS = {
     allowedOrigin: 'http://localhost:4200',
+    allowedOrigin2: 'http://localhost:3000',
+    allowedOrigin3: 'http://localhost:3001',
     serCode: {
         success: 200,
         badRequest: 400,
