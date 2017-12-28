@@ -7,7 +7,7 @@ let userSchema = new mongoose.Schema({
         dropDups: true,
         required: true,
         index: true,
-        minlength: [5, 'Username must be 5 characters or more']
+        minlength: [4, 'Username must be 4 characters or more']
     },
     email: {
         type: String,
@@ -22,6 +22,7 @@ let userSchema = new mongoose.Schema({
         minlength: [8, 'Username must be 9 characters or more']
     },
     isDeleted: { type: Boolean, default: false },
+    role:{ type: Number, default:2 },
     createdAt: { type: Date, default: Date.now },
 });
 

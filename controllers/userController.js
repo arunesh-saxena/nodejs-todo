@@ -7,6 +7,7 @@ var singUp = function (req, res) {
     let username = req.body.username,
         email = req.body.email,
         password = req.body.password,
+        role = req.body.role,
         passwordHash = '';
     db.User.findOne({
         $or: [
@@ -19,7 +20,7 @@ var singUp = function (req, res) {
                     // Store hash in your password DB.
                     passwordHash = hash;
                     // db.User.on('index', function (error) {
-                    db.User({ username: username, 'email': email, password: passwordHash }).save().then((data) => {
+                    db.User({ username: username, 'email': email, password: passwordHash, role: role }).save().then((data) => {
                         delete data.password;
                         res.status(CONSTANTS.serCode.success).json({
                             success: true,
