@@ -9,8 +9,8 @@ var session = require('express-session');
 
 mongoose.Promise = global.Promise; /* to make promise in mongoose */
 
-var router = require('./routes/router'),
-    CONSTANTS = require('./constants');
+var router = require('./src/routes/router'),
+    CONSTANTS = require('./src/constants');
 
 //Connect to the database
 mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) {
