@@ -2,11 +2,6 @@ var db = require('../models'),
     CONSTANTS = require('../constants');
 var addMenu = (req, res) => {
     let body = req.body;
-    console.log(body);
-    // res.status(CONSTANTS.serCode.success).json({
-    //     success: false,
-    //     data: {msg:'testing done'}
-    //   });
     var menuMenu = db.Menu(body).save(function (err, data) {
       if (err) {
         res.status(CONSTANTS.serCode.ISE).json({
