@@ -10,7 +10,7 @@ let menuSchema = new mongoose.Schema({
     unit: {type: String, required: true},
     currency: {type: String, required: true},
     isDeleted: { type: Boolean, default: false },
-    createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date },
     updatedAt: { type: Date, default: Date.now }
 });
 
@@ -25,6 +25,7 @@ menuSchema.pre('save', function(next) {
         }else{
             doc.itemCode = `${doc.itemName.substr(0,3)}${doc.id}`;
         }        
+        doc.createdAt = Date.now();
         next();
     });
 });

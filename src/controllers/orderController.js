@@ -13,7 +13,8 @@ var updateOrder = (req, res) => {
     const body = req.body,
         orderId = req.params.id;
     const setObj = {
-        status: body.status
+        status: body.status,
+        updatedAt: Date.now()
     };
     const order = db.Order.update({
             id: orderId

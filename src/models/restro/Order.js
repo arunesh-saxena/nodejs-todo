@@ -13,8 +13,8 @@ let orderSchema = new mongoose.Schema({
             qnty:{type:Number}}], required:true},
     status: { type: String, default: CONSTANT.restro.orderStatus.PENDING },
     isDeleted: { type: Boolean, default: false },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    createdAt: { type: Date},
+    updatedAt: { type: Date, default: Date.now}
 });
 
 var Order = mongoose.model('order', orderSchema);
@@ -25,6 +25,7 @@ orderSchema.pre('save', function(next) {
         if(data.length){
             doc.id = ++data[0].id;            
         }  
+        doc.createdAt = Date.now();
         next();
     });
 });
