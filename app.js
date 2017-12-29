@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser')
 var session = require('express-session');
+var path = require('path');
 // var RedisStore = require('connect-redis')(session);
 // var redis = require("redis");
 // var client = redis.createClient();
@@ -11,6 +12,8 @@ mongoose.Promise = global.Promise; /* to make promise in mongoose */
 
 var router = require('./src/routes/router'),
     CONSTANTS = require('./src/constants');
+    
+var app = express();
 
 //Connect to the database
 mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) {
@@ -19,15 +22,12 @@ mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) 
     }
 });
 
-
-
-var app = express();
-
 //Middleware 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');/* for tamplating */
+app.set('views', path.join(__dirname + '/src/views'));/* set view path */
 
 app.use(cookieParser());
 app.use(session({
@@ -68,4 +68,5 @@ app.use(function (err, req, res, next) {
 }); */
 
 app.use('/api', router);
+
 module.exports = app;

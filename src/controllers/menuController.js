@@ -24,6 +24,7 @@ var addMenu = (req, res) => {
 }
 
 var getMenuList = (req, res) => {
+  console.log(__dirname);
       db.Menu.find({}, function (err, data) {
         if (err) {
           res.status(CONSTANTS.serCode.ISE).json({

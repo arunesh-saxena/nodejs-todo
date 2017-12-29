@@ -90,7 +90,11 @@ routes.get('/menu/list/', menuCtrl.getMenuList);
 /* testing */
 
 routes.get('/test', function (req, res) {
-    res.render('test');
+    // res.status(CONSTANTS.serCode.success).json({
+    //         success: false,
+    //         data: {msg:'testing done'}
+    //       });
+     res.render('test');
 })
 
 
