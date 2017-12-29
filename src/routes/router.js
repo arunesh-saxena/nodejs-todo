@@ -8,7 +8,8 @@ var todoCtrl = require('../controllers/todoController'),
     userCtrl = require('../controllers/userController'),
     postCtrl = require('../controllers/postController'),
     commentCtrl = require('../controllers/commentController'),
-    menuCtrl = require('../controllers/menuController');
+    menuCtrl = require('../controllers/menuController'),
+    orderCtrl = require('../controllers/orderController');
 
 var CONSTANTS = require('../constants');
 
@@ -84,6 +85,14 @@ routes.get('/comments', commentCtrl.get);
 routes.post('/menu/add/', menuCtrl.addMenu);
 
 routes.get('/menu/list/', menuCtrl.getMenuList);
+
+routes.post('/order/add/', orderCtrl.addOrder);
+
+routes.put('/order/:id/', orderCtrl.updateOrder);
+
+routes.get('/order/:id', orderCtrl.getOrder);
+
+routes.get('/orders/', orderCtrl.getOrderList);
 
 /* Restro end */
 

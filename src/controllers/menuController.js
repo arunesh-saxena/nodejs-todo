@@ -1,5 +1,6 @@
 var db = require('../models'),
     CONSTANTS = require('../constants');
+
 var addMenu = (req, res) => {
     let body = req.body;
     var menuMenu = db.Menu(body).save(function (err, data) {
@@ -15,11 +16,10 @@ var addMenu = (req, res) => {
           data: data
         });
       }
-    })
+    });
 }
 
 var getMenuList = (req, res) => {
-  console.log(__dirname);
       db.Menu.find({}, function (err, data) {
         if (err) {
           res.status(CONSTANTS.serCode.ISE).json({
@@ -35,6 +35,7 @@ var getMenuList = (req, res) => {
         }
       })
 }
+
 module.exports = {
     addMenu: addMenu,
     getMenuList: getMenuList

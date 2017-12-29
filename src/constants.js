@@ -27,7 +27,16 @@ const CONSTANTS = {
             msg: msg || null
         }
     ),
-    sessionTimeout: null
+    sessionTimeout: null,
+    restro:{
+        orderStatus:{
+            'PENDING': 1,
+            'ACCEPTED': 2,
+            'PROCESSING': 3,
+            'COMPLETED': 4,
+            'DELIVERED': 5
+        }
+    }
 }
 
 module.exports = CONSTANTS;
