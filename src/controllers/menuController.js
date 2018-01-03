@@ -3,9 +3,8 @@ var db = require('../models'),
 
 var addMenu = (req, res) => {
     let body = req.body;
-    console.log('addMenu', body)
-   // addMenutest(req, res);
-     var menuMenu = db.Menu(body).save(function (err, data) {
+    body.imageURL = req.file.path;
+    var menuMenu = db.Menu(body).save(function (err, data) {
       if (err) {
         res.status(CONSTANTS.serCode.ISE).json({
           success: false,
@@ -18,15 +17,7 @@ var addMenu = (req, res) => {
           data: data
         });
       }
-    }); 
-}
-var addMenutest = (req, res) => {
-  let body = req.body;
-  console.log('addMenu', body)
-  res.status(CONSTANTS.serCode.success).json({
-    success: true,
-    data: body
-  });
+    });
 }
 
 var getMenuList = (req, res) => {
