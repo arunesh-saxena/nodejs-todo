@@ -3,20 +3,30 @@ var db = require('../models'),
 
 var addMenu = (req, res) => {
     let body = req.body;
-    var menuMenu = db.Menu(body).save(function (err, data) {
+    console.log('addMenu', body)
+   // addMenutest(req, res);
+     var menuMenu = db.Menu(body).save(function (err, data) {
       if (err) {
         res.status(CONSTANTS.serCode.ISE).json({
           success: false,
           message: err
         });
-        throw err;
+        // throw errrs
       } else {
         res.status(CONSTANTS.serCode.success).json({
           success: true,
           data: data
         });
       }
-    });
+    }); 
+}
+var addMenutest = (req, res) => {
+  let body = req.body;
+  console.log('addMenu', body)
+  res.status(CONSTANTS.serCode.success).json({
+    success: true,
+    data: body
+  });
 }
 
 var getMenuList = (req, res) => {
@@ -30,7 +40,7 @@ var getMenuList = (req, res) => {
         } else {
           res.status(CONSTANTS.serCode.success).json({
             success: true,
-            todos: data
+            data: data
           });
         }
       })

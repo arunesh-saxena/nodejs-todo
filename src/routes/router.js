@@ -2,6 +2,26 @@ var express = require('express');
 var routes = express.Router();
 var session = require('express-session');
 var cors = require('cors');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {console.log(file);
+        cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+        let info = file.originalname.split('.');
+        const ext = info[info.length-1];
+        console.log(file);
+        cb(null, `${info[0]}-${Date.now()}.${ext}`)
+    }
+});
+
+var upload = multer({storage: storage}).single('imageURL');
+
+routes.post('/imageUpload',upload, function (req, res) {
+    console.log('hello', req.body)
+   
+});
 
 /* controllers */
 var todoCtrl = require('../controllers/todoController'),
@@ -13,12 +33,7 @@ var todoCtrl = require('../controllers/todoController'),
 
 var CONSTANTS = require('../constants');
 
-
 var sess = '';
-/* routes.use('/', function (req, res, next) {
-    // console.log('/ for rotuers middle ware');
-    // next();
-}); */
 
 var isAuthenticated = (req, res, next) => {
     let sess = req.session;
@@ -82,7 +97,14 @@ routes.post('/comment', commentCtrl.comment);
 routes.get('/comments', commentCtrl.get);
 
 /* Restro start */
-routes.post('/menu/add/', menuCtrl.addMenu);
+// routes.post('/menu/add/', menuCtrl.addMenu);
+routes.post('/menu/add/', upload, menuCtrl.addMenu);
+/* routes.post('/menu/add/', upload, function(req,res){
+    res.status(CONSTANTS.serCode.success).json({
+        success: true,
+        data: req.body
+      });
+}); */
 
 routes.get('/menu/list/', menuCtrl.getMenuList);
 
