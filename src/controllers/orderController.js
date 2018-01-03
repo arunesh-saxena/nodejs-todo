@@ -60,10 +60,10 @@ var getOrder = (req, res) => {
 const sendRes = (res, err, data) => {
     if (err) {
         res.status(CONSTANTS.serCode.ISE).json({
-          success: true,
-          data: data
+          success: false,
+          data: err
         });
-        throw err;
+        // throw err;
       } else {
         res.status(CONSTANTS.serCode.success).json({
           success: true,
