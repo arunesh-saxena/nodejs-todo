@@ -29,6 +29,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');/* for tamplating */
 app.set('views', path.join(__dirname + '/src/views'));/* set view path */
 
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(cookieParser());
 app.use(session({
     secret: 'keyboard cat',
@@ -66,7 +68,6 @@ app.use(function (err, req, res, next) {
     // console.log('/api middle ware');
     next();
 }); */
-
 app.use('/api', router);
 
 module.exports = app;
