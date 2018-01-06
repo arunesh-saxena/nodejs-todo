@@ -9,7 +9,7 @@ let orderSchema = new mongoose.Schema({
         default: 1
     },
     orderBy: {
-        type: String,
+        type: Number,
         required: true
     },
     items: {
@@ -18,6 +18,10 @@ let orderSchema = new mongoose.Schema({
                 id: {
                     type: Number,
                     required: true
+                },
+                itemName:{
+                    type: String,
+                    require: true
                 },
                 qnty: {
                     type: Number,

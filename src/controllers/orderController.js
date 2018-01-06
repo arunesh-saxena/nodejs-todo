@@ -53,7 +53,7 @@ var getOrderList = (req, res) => {
 var getOrder = (req, res) => {
     const orderId = req.params.id ;
     getOrderbyId(orderId, (err, data) => {
-        sendRes(res, err, data);
+        sendRes(res, err, data[0]);
     });
 };
 

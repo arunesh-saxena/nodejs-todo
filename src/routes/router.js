@@ -96,14 +96,8 @@ routes.post('/comment', commentCtrl.comment);
 routes.get('/comments', commentCtrl.get);
 
 /* Restro start */
-// routes.post('/menu/add/', menuCtrl.addMenu);
+
 routes.post('/menu/add/', upload, menuCtrl.addMenu);
-/* routes.post('/menu/add/', upload, function(req,res){
-    res.status(CONSTANTS.serCode.success).json({
-        success: true,
-        data: req.body
-      });
-}); */
 
 routes.get('/menu/list/', menuCtrl.getMenuList);
 
