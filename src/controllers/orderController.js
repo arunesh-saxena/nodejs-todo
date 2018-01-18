@@ -25,7 +25,7 @@ var updateOrder = (req, res) => {
                 sendRes(res, err, data);  
             } else {
                 getOrderbyId(orderId, function(err,data){
-                    sendRes(res, err, data);
+                    sendRes(res, err, data[0]);
                 })
                   
             }
