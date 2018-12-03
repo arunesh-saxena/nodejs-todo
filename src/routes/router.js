@@ -120,6 +120,12 @@ routes.get('/test', function (req, res) {
     //       });
      res.render('test');
 })
+routes.get('/testApi', function (req, res) {
+    res.status(CONSTANTS.serCode.success).json({
+            success: false,
+            data: {msg:'testing done'}
+          });
+})
 
 
 

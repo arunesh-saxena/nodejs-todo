@@ -16,11 +16,16 @@ var router = require('./src/routes/router'),
 var app = express();
 
 //Connect to the database
-mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) {
+mongoose.connect("mongodb://localhost:27017/todo", function (err, db) {
     if (!err) {
         console.log("We are connected");
     }
 });
+/* mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) {
+    if (!err) {
+        console.log("We are connected");
+    }
+}); */
 
 //Middleware 
 app.use(bodyParser.json());
