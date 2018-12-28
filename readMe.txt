@@ -8,6 +8,6 @@ socket will run 8000
 
 install mongo db
 
->mongoD (mongo dn server up)
+>mongoD (mongo db server up)
 > mongo start (mongo shell)
 use mongoDB compass tool to check mongoDB tables
