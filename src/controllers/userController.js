@@ -22,32 +22,40 @@ var singUp = function (req, res) {
                     // db.User.on('index', function (error) {
                     db.User({ username: username, 'email': email, password: passwordHash, role: role }).save().then((data) => {
                         delete data.password;
-                        res.status(CONSTANTS.serCode.success).json({
+                        res.json({
                             success: true,
                             data: data
                         });
                     }).catch(err => {
-                        res.status(CONSTANTS.serCode.forbidden).json({
+                        res.json({
                             success: false,
-                            message: err
+                            data: err
                         });
                     });
-                    // });
                 });
             });
         } else {
-            res.status(CONSTANTS.serCode.forbidden).json({
+            res.json({
                 success: false,
-                message: `${(username == data.username ? username : '')} ${(username == data.username && email == data.email) ? 'and' : ''} ${(email == data.email ? email : '')} is already exsit.`
+                data: {
+                    message: `${(username == data.username ? username : '')} ${(username == data.username && email == data.email) ? 'and' : ''} ${(email == data.email ? email : '')} is already exsit.`
+                }
             });
         }
 
     }).catch(err => {
-        res.status(CONSTANTS.serCode.ISE).json({
+        res.json({
             success: false,
-            message: err
+            data: err
         })
     })
+    // res.json({
+    //     success: false,
+    //     data: {
+    //         message: 'something went wrong'
+    //     }
+    // })
+    /* todo: need to handle when DB connection is not available */
 
 
 }
@@ -83,7 +91,7 @@ var login = function (req, res) {
                     });
                 }
             });
-        }else{
+        } else {
             res.status(CONSTANTS.serCode.success).json({
                 success: false,
                 message: 'username  not found.'
