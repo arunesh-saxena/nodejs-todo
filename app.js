@@ -19,6 +19,8 @@ var app = express();
 mongoose.connect("mongodb://localhost:27017/todo", function (err, db) {
     if (!err) {
         console.log("We are connected");
+    } else {
+        console.log("We are not connected");
     }
 });
 /* mongoose.connect("mongodb://test:test@localhost:27017/todo", function (err, db) {

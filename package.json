@@ -4,7 +4,8 @@
   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl ipsum, interdum ut nibh id, congue tincidunt lectus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed dolor mi, dapibus at nisi vel, convallis tristique ligula. Ut tincidunt mi vitae quam gravida, in imperdiet nulla pretium. Cras bibendum posuere faucibus. Integer non lacus pretium, tincidunt urna in, egestas tellus. Curabitur vel neque maximus, ultricies urna eu, tempus nulla. Aenean facilisis sit amet nulla ac volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
