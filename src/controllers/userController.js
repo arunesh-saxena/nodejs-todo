@@ -61,9 +61,7 @@ var singUp = function (req, res) {
 }
 
 var login = function (req, res) {
-    console.log(req.body)
     db.User.findOne({ username: req.body.username }).then(user => {
-        console.log(user)
         if (user) {
             bcrypt.compare(req.body.password, user.password).then((result) => {
                 delete user.password;
@@ -71,28 +69,23 @@ var login = function (req, res) {
                 if (result) {
                     sess = req.session;
                     sess.username = user.username;
-                    sess._id = user._id;
-                    sess.email = user.email;
-                    res.status(CONSTANTS.serCode.success).json({
+                    /* sess._id = user._id;
+                    sess.email = user.email; */
+                    res.json({
                         success: true,
                         data: {
-                            "_id": user._id,
-                            "username": user.username,
-                            email: user.email,
-                            "__v": user.__v,
-                            "createdAt": user.createdAt,
-                            "isDeleted": user.isDeleted
+                            "username": user.username
                         }
                     });
                 } else {
-                    res.status(CONSTANTS.serCode.success).json({
+                    res.json({
                         success: false,
                         message: 'username and password does\'t not match.'
                     });
                 }
             });
         } else {
-            res.status(CONSTANTS.serCode.success).json({
+            res.json({
                 success: false,
                 message: 'username  not found.'
             })
@@ -101,7 +94,7 @@ var login = function (req, res) {
 
     }).catch(err => {
         console.log(err)
-        res.status(CONSTANTS.serCode.ISE).json({
+        res.json({
             success: false,
             message: JSON.stringify(err)
         })
@@ -113,13 +106,12 @@ var logout = (req, res) => {
     req.session.destroy(function (err) {
         if (err) {
             throw (err);
-
-            res.status(CONSTANTS.serCode.ISE).json({
+            res.json({
                 success: false,
                 message: err
             });
         } else {
-            res.status(CONSTANTS.serCode.success).json({
+            res.json({
                 success: true,
                 message: `${username} logout successfully.`
             });
