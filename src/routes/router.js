@@ -29,10 +29,9 @@ var todoCtrl = require('../controllers/todoController'),
     commentCtrl = require('../controllers/commentController'),
     menuCtrl = require('../controllers/menuController'),
     orderCtrl = require('../controllers/orderController');
-
 var CONSTANTS = require('../constants');
 
-let token_secret = 'iy98hcbh489n38984y4h498';
+let token_secret = CONSTANTS.token_secret;
 
 var isAuthenticated = (req, res, next) => {
     // check for token in the header first, then if not provided, it checks whether it's supplied in the body of the request
@@ -95,11 +94,12 @@ routes.post('/login/', userCtrl.login);
 routes.get('/logout', userCtrl.logout);
 // routes.post('/logout', userCtrl.logout);
 /* check is user is loggin on server */
-routes.post('/isLogin',isAuthenticated, (req, res) => {
+routes.post('/isLogin', isAuthenticated, (req, res) => {
+    let decoded = req.decoded;
     res.json({
         success: true,
         data: {
-            "token": req.decoded
+            username: decoded.username
         }
     });
 });

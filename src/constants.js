@@ -37,7 +37,8 @@ const CONSTANTS = {
             'COMPLETED': 4,
             'DELIVERED': 5
         }
-    }
+    },
+    token_secret: 'iy98hcbh489n38984y4h498'
 }
 
 module.exports = CONSTANTS;

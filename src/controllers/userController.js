@@ -3,7 +3,7 @@ var db = require('../models'),
     session = require('express-session'),
     CONSTANTS = require('../constants'),
     jwt = require('jsonwebtoken');
-let token_secret = 'iy98hcbh489n38984y4h498';
+let token_secret = CONSTANTS.token_secret;
 
 var singUp = function (req, res) {
     let username = req.body.username,
