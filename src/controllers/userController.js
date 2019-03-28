@@ -2,7 +2,9 @@ var db = require('../models'),
     bcrypt = require('bcryptjs'),
     session = require('express-session'),
     CONSTANTS = require('../constants'),
-    sess = '';
+    jwt = require('jsonwebtoken');
+let token_secret = 'iy98hcbh489n38984y4h498';
+
 var singUp = function (req, res) {
     let username = req.body.username,
         email = req.body.email,
@@ -67,14 +69,20 @@ var login = function (req, res) {
                 delete user.password;
                 delete user['password'];
                 if (result) {
-                    sess = req.session;
-                    sess.username = user.username;
-                    /* sess._id = user._id;
-                    sess.email = user.email; */
+                    console.log(user)
+                    // 1. here our payload contains data we want client to hold for when next they send us any request
+                    const payload = {
+                        email: user.email,
+                        username: user.username,
+                        id: user._id
+                    }
+                    // 2. then we use jwt to sign our payload with our secret defined token_secret
+                    let token = jwt.sign(payload, token_secret, { expiresIn: '1h' });
                     res.json({
                         success: true,
                         data: {
-                            "username": user.username
+                            "username": user.username,
+                            token
                         }
                     });
                 } else {
@@ -102,20 +110,10 @@ var login = function (req, res) {
 }
 
 var logout = (req, res) => {
-    let username = sess.username;
-    req.session.destroy(function (err) {
-        if (err) {
-            throw (err);
-            res.json({
-                success: false,
-                message: err
-            });
-        } else {
-            res.json({
-                success: true,
-                message: `${username} logout successfully.`
-            });
-        }
+/* TODO: hanlde JWT token  */
+    res.json({
+        success: true,
+        message: `Logout successfully.`
     });
 }
 

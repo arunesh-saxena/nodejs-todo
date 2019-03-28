@@ -1,7 +1,8 @@
 const CONSTANTS = {
     allowedOrigin: 'http://localhost:4200',
     allowedOrigin2: 'http://localhost:3000',
-    allowedOrigin3: 'http://localhost:3001',
+    allowedOrigin3: 'http://localhost:8080',
+    allowedOrigin4: 'http://localhost:3030',
     serCode: {
         success: 200,
         badRequest: 400,
@@ -21,7 +22,7 @@ const CONSTANTS = {
     },
     getSerMsg: (errorCode, msg) => (
         {
-            status: (errorCode == 200) ? true : false,
+            success : (errorCode == 200) ? true : false,
             errorCode: errorCode,
             errorMsg: CONSTANTS.serMsg[errorCode],
             msg: msg || null
