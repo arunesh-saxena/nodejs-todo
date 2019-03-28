@@ -36,20 +36,31 @@ let token_secret = 'iy98hcbh489n38984y4h498';
 
 var isAuthenticated = (req, res, next) => {
     // check for token in the header first, then if not provided, it checks whether it's supplied in the body of the request
-  var token = req.headers['x-access-token'] || req.body.token;
-  console.log(token)
-  if (token) {
-    jwt.verify(token, token_secret, function (err, decoded) {
-      if (!err) {
-        req.decoded = decoded; // this add the decoded payload to the client req (request) object and make it available in the routes
-        next();
-      } else {
-        res.status(403).send('Invalid token supplied');
-      }
-    })
-  } else {
-    res.status(403).send('Authorization failed! Please provide a valid token');
-  }
+    var token = req.headers['x-access-token'] || req.body.token;
+    if (token) {
+        jwt.verify(token, token_secret, function (err, decoded) {
+            if (!err) {
+                req.decoded = decoded; // this add the decoded payload to the client req (request) object and make it available in the routes
+                next();
+            } else {
+                // res.status(403).send('Invalid token supplied');
+                res.json({
+                    success: false,
+                    data: {
+                        message: 'Invalid token supplied'
+                    }
+                });
+            }
+        })
+    } else {
+        // res.status(403).send('Authorization failed! Please provide a valid token');
+        res.json({
+            success: false,
+            data: {
+                message: 'Authorization failed! Please provide a valid token'
+            }
+        });
+    }
 };
 var issue2options = {
     origin: [CONSTANTS.allowedOrigin, CONSTANTS.allowedOrigin2, CONSTANTS.allowedOrigin3, CONSTANTS.allowedOrigin4],
@@ -85,8 +96,6 @@ routes.get('/logout', userCtrl.logout);
 // routes.post('/logout', userCtrl.logout);
 /* check is user is loggin on server */
 routes.post('/isLogin',isAuthenticated, (req, res) => {
-    console.log('---------isLogin--------');
-    console.log(req.decoded);
     res.json({
         success: true,
         data: {

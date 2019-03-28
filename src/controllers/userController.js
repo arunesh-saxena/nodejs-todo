@@ -69,7 +69,6 @@ var login = function (req, res) {
                 delete user.password;
                 delete user['password'];
                 if (result) {
-                    console.log(user)
                     // 1. here our payload contains data we want client to hold for when next they send us any request
                     const payload = {
                         email: user.email,
@@ -98,8 +97,6 @@ var login = function (req, res) {
                 message: 'username  not found.'
             })
         }
-
-
     }).catch(err => {
         console.log(err)
         res.json({
