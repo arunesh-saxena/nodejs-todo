@@ -3,16 +3,18 @@ var db = require('../models'),
 
 var addMenu = (req, res) => {
     let body = req.body;
-    body.imageURL = req.file.path;
+    if(req.file && req.file.path){
+      body.imageURL = req.file && req.file.path;
+    }
+    
     var menuMenu = db.Menu(body).save(function (err, data) {
       if (err) {
-        res.status(CONSTANTS.serCode.ISE).json({
+        res.json({
           success: false,
           message: err
         });
-        // throw errrs
       } else {
-        res.status(CONSTANTS.serCode.success).json({
+        res.json({
           success: true,
           data: data
         });
@@ -23,13 +25,12 @@ var addMenu = (req, res) => {
 var getMenuList = (req, res) => {
       db.Menu.find({}, function (err, data) {
         if (err) {
-          res.status(CONSTANTS.serCode.ISE).json({
+          res.json({
             success: false,
             message: err
           });
-          throw err;
         } else {
-          res.status(CONSTANTS.serCode.success).json({
+          res.json({
             success: true,
             data: data
           });

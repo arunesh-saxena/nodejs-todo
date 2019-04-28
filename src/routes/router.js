@@ -118,7 +118,7 @@ routes.get('/comments', commentCtrl.get);
 
 routes.post('/menu/add/', upload, menuCtrl.addMenu);
 
-routes.get('/menu/list/', menuCtrl.getMenuList);
+routes.post('/menu/list/', menuCtrl.getMenuList);
 
 routes.post('/order/add/', orderCtrl.addOrder);
 
