@@ -122,6 +122,8 @@ routes.post('/menu/list/', menuCtrl.getMenuList);
 
 routes.get('/menu/getMenuItem/:itemID/', menuCtrl.getMenuItem);
 
+routes.post('/menu/updateMenuItem/', upload, menuCtrl.updateMenuItem);
+
 routes.post('/order/add/', orderCtrl.addOrder);
 
 routes.put('/order/:id/', orderCtrl.updateOrder);
