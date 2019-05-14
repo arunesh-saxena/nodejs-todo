@@ -120,6 +120,8 @@ routes.post('/menu/add/', upload, menuCtrl.addMenu);
 
 routes.post('/menu/list/', menuCtrl.getMenuList);
 
+routes.get('/menu/getMenuItem/:itemID/', menuCtrl.getMenuItem);
+
 routes.post('/order/add/', orderCtrl.addOrder);
 
 routes.put('/order/:id/', orderCtrl.updateOrder);

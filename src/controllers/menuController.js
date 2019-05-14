@@ -23,22 +23,41 @@ var addMenu = (req, res) => {
 }
 
 var getMenuList = (req, res) => {
-      db.Menu.find({}, function (err, data) {
-        if (err) {
-          res.json({
-            success: false,
-            message: err
-          });
-        } else {
-          res.json({
-            success: true,
-            data: data
-          });
-        }
-      })
+  db.Menu.find({}, function (err, data) {
+    if (err) {
+      res.json({
+        success: false,
+        message: err
+      });
+    } else {
+      res.json({
+        success: true,
+        data: data
+      });
+    }
+  })
+}
+
+
+var getMenuItem = (req, res) => {
+  const itemId = req.params.itemID ;console.log(itemId)
+  db.Menu.findOne({id:itemId}, function (err, data) {
+    if (err) {
+      res.json({
+        success: false,
+        message: err
+      });
+    } else {
+      res.json({
+        success: true,
+        data: data
+      });
+    }
+  })
 }
 
 module.exports = {
     addMenu: addMenu,
-    getMenuList: getMenuList
+    getMenuList: getMenuList,
+    getMenuItem: getMenuItem
 }
