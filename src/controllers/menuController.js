@@ -38,21 +38,24 @@ var getMenuList = (req, res) => {
   })
 }
 
-var getMenuItem = (req, res) => {
+var getMenuItem = async (req, res) => {
   const itemId = req.params.itemID;
-  db.Menu.findOne({ id: itemId }, function (err, data) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err
-      });
-    } else {
-      res.json({
-        success: true,
-        data: data
-      });
-    }
-  })
+  try {
+    const item = await getMenuItemById(itemId);
+    res.json({
+      success: true,
+      data: item
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      data: err
+    });
+  }
+};
+
+let getMenuItemById = async (itemId) => {
+  return await db.Menu.findOne({ id: itemId }).exec();
 };
 
 var updateMenuItem = (req, res) => {
@@ -68,17 +71,26 @@ var updateMenuItem = (req, res) => {
       $set: {
         ...body
       }
-    }, function (err, data) {
+    },
+    { upsert: true }, async function (err, data) {
       if (err) {
         res.json({
           success: false,
           message: err
         });
       } else {
-        res.json({
-          success: true,
-          data: data
-        });
+        try {
+          const item = await getMenuItemById(itemId);
+          res.json({
+            success: true,
+            data: item
+          });
+        } catch (err) {
+          res.json({
+            success: false,
+            data: err
+          });
+        }
       }
     })
 };
