@@ -9,6 +9,8 @@ let menuSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     unit: { type: String, required: true },
     currency: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    isHidden: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
     createdAt: { type: Date },
     updatedAt: { type: Date, default: Date.now }

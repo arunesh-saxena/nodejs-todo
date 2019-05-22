@@ -1,5 +1,4 @@
-var db = require('../models'),
-  CONSTANTS = require('../constants');
+var db = require('../models');
 
 var addMenu = (req, res) => {
   let body = req.body;
