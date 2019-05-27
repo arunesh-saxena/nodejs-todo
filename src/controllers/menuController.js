@@ -71,7 +71,7 @@ var updateMenuItem = (req, res) => {
         ...body
       }
     },
-    { upsert: true }, async function (err, data) {
+    { upsert: false }, async function (err, data) {
       if (err) {
         res.json({
           success: false,
@@ -94,10 +94,114 @@ var updateMenuItem = (req, res) => {
     })
 };
 
+const changeMenuItemQuantity = (req, res) => {
+  let body = req.body;
+  const itemId = parseInt(body.itemId);
+  db.Menu.update(
+    { id: itemId },
+    {
+      $set: {
+        quantity: body.quantity
+      }
+    },
+    { upsert: false }, async (err, data) => {
+      if (err) {
+        res.json({
+          success: false,
+          message: err
+        });
+      } else {
+        try {
+          const item = await getMenuItemById(itemId);
+          res.json({
+            success: true,
+            data: item
+          });
+        } catch (err) {
+          res.json({
+            success: false,
+            data: err
+          });
+        }
+      }
+    }
+  )
+};
+
+const toggleHiddenMenuItem = (req, res) => {
+  let body = req.body;
+  const itemId = parseInt(body.itemId);
+  db.Menu.update(
+    { id: itemId },
+    {
+      $set: {
+        isHidden: body.isHidden
+      }
+    },
+    { upsert: false }, async (err, data) => {
+      if (err) {
+        res.json({
+          success: false,
+          message: err
+        });
+      } else {
+        try {
+          const item = await getMenuItemById(itemId);
+          res.json({
+            success: true,
+            data: item
+          });
+        } catch (err) {
+          res.json({
+            success: false,
+            data: err
+          });
+        }
+      }
+    }
+  )
+};
+
+const deleteMenuItem = (req, res) => {
+  let body = req.body;
+  const itemId = parseInt(body.itemId);
+  db.Menu.update(
+    { id: itemId },
+    {
+      $set: {
+        isDeleted: false
+      }
+    },
+    { upsert: false }, async (err, data) => {
+      if (err) {
+        res.json({
+          success: false,
+          message: err
+        });
+      } else {
+        try {
+          const item = await getMenuItemById(itemId);
+          res.json({
+            success: true,
+            data: item
+          });
+        } catch (err) {
+          res.json({
+            success: false,
+            data: err
+          });
+        }
+      }
+    }
+  )
+}
 
 module.exports = {
   addMenu: addMenu,
   getMenuList: getMenuList,
   getMenuItem: getMenuItem,
-  updateMenuItem: updateMenuItem
+  updateMenuItem: updateMenuItem,
+  changeMenuItemQuantity: changeMenuItemQuantity,
+  toggleHiddenMenuItem: toggleHiddenMenuItem,
+  deleteMenuItem: deleteMenuItem
 }

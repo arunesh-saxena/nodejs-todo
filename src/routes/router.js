@@ -123,6 +123,9 @@ routes.post('/menu/list/', menuCtrl.getMenuList);
 routes.get('/menu/getMenuItem/:itemID/', menuCtrl.getMenuItem);
 
 routes.post('/menu/updateMenuItem/', upload, menuCtrl.updateMenuItem);
+routes.put('/menu/changeMenuItemQuantity/', menuCtrl.changeMenuItemQuantity);
+routes.put('/menu/toggleHiddenMenuItem/', menuCtrl.toggleHiddenMenuItem);
+routes.delete('/menu/deleteMenuItem/', menuCtrl.deleteMenuItem);
 
 routes.post('/order/add/', orderCtrl.addOrder);
 
